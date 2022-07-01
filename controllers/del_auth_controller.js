@@ -1,12 +1,12 @@
-let database = require("../database");
+let database = require("../database_del")
 
 let authController = {
   login: (req, res) => {
-    res.render("auth/login");
+    res.render("auth/login")
   },
 
   register: (req, res) => {
-    res.render("auth/register");
+    res.render("auth/register")
   },
 
   loginSubmit: (req, res) => {
@@ -16,6 +16,6 @@ let authController = {
   registerSubmit: (req, res) => {
     // implement
   },
-};
+}
 
-module.exports = authController;
+module.exports = authController

@@ -1,8 +1,13 @@
-let database = require("../database")
+const remindModel = require("../models/remindersModel").remindModel
+const reminders = require("../models/remindersModel").reminders
 
-let remindersController = {
+let remindController = {
   list: (req, res) => {
-    res.render("reminder/index", { reminders: database.cindy.reminders })
+    //console.log("we are here", req.user)
+    res.render("reminder/index", {
+      reminders: remindModel.findByUserId(req.user.id),
+      username: req.user.name,
+    })
   },
 
   new: (req, res) => {
@@ -10,33 +15,32 @@ let remindersController = {
   },
 
   listOne: (req, res) => {
-    let reminderToFind = req.params.id
-    let searchResult = database.cindy.reminders.find(function (reminder) {
-      return reminder.id == reminderToFind
-    })
+    let searchResult = remindModel.findById(req.params.id * 1)
+
     if (searchResult != undefined) {
       res.render("reminder/single-reminder", { reminderItem: searchResult })
     } else {
-      res.render("reminder/index", { reminders: database.cindy.reminders })
+      res.render("reminder/index", {
+        reminders: remindModel.findByUserId(req.user.id),
+        username: req.user.name,
+      })
     }
   },
 
   create: (req, res) => {
     let reminder = {
-      id: database.cindy.reminders.length + 1,
+      id: reminders.length + 1,
       title: req.body.title,
       description: req.body.description,
       completed: false,
+      userId: req.user.id,
     }
-    database.cindy.reminders.push(reminder)
+    reminders.push(reminder)
     res.redirect("/reminders")
   },
 
   edit: (req, res) => {
-    let reminderToFind = req.params.id
-    let searchResult = database.cindy.reminders.find(function (reminder) {
-      return reminder.id == reminderToFind
-    })
+    let searchResult = remindModel.findById(req.params.id * 1)
     res.render("reminder/edit", { reminderItem: searchResult })
   },
 
@@ -44,7 +48,7 @@ let remindersController = {
     const Id = req.params.id
     const { title, description, completed } = req.body
 
-    database.cindy.reminders.map((reminder) => {
+    reminders.map((reminder) => {
       if (reminder.id == Id) {
         reminder.title = title
         reminder.description = description
@@ -52,21 +56,17 @@ let remindersController = {
       }
       return reminder
     })
-
     res.redirect("/reminders")
   },
 
   delete: (req, res) => {
     const Id = req.params.id
-    const removeIndex = database.cindy.reminders.findIndex(
-      (reminder) => reminder.id == Id
-    )
-
+    const removeIndex = reminders.findIndex((reminder) => reminder.id == Id)
     if (removeIndex >= 0) {
-      database.cindy.reminders.splice(removeIndex, 1)
+      reminders.splice(removeIndex, 1)
     }
     res.redirect("/reminders")
   },
 }
 
-module.exports = remindersController
+module.exports = remindController
