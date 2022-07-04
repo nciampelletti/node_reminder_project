@@ -30,6 +30,7 @@ app.use(
 
 const authRoute = require("./routes/authRoute")
 const remindersRoute = require("./routes/remindRoute")
+const adminRoute = require("./routes/adminRoute")
 
 // Middleware for express
 app.use(express.json())
@@ -53,6 +54,7 @@ app.use(passport.session())
 
 app.use("/", remindersRoute)
 app.use("/auth", authRoute)
+app.use("/admin", adminRoute)
 
 app.listen(port, () => {
   console.log(`🚀 Server dd has started on port ${port}`)

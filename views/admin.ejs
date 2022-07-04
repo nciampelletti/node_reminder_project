@@ -1,0 +1,21 @@
+<div class="row mt-5">
+  <div class="col-md-8 m-auto">
+    <h1 class="mb-3">ADMIN dashboard</h1>
+         <h3 class="mb-3">Welcome, <%= currentUser %></h3>
+         <h5 class="mb-3">Current active sessions: </h5>
+
+ 
+    <% activeSessions.forEach(function (sessionItem) { %>
+      <div class="card">
+        <div class="card-header">
+          <%= sessionItem.userName %>
+        </div>
+        <div class="card-body">
+          <p class="card-title">SessionId: <%= sessionItem.sessionId %></p>
+          <p class="card-text">User Name: <%= sessionItem.userName %></p>
+          <a  class="btn btn-danger" href="<%= "/admin/destroy/" + sessionItem.sessionId %>">Revoke Session</a>
+        </div>
+      </div>
+    <% }) %>
+   </div>
+</div>

@@ -17,8 +17,8 @@ const getUserById = (id) => {
   return null
 }
 
-const createUser = (id, name, email, password) => {
-  let user = userModel.createNewUser(id, name, email, password)
+const createUser = (id, name, email, password, role) => {
+  let user = userModel.createNewUser(id, name, email, password, role)
   if (user) {
     return user
   }

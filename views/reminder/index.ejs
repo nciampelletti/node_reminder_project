@@ -1,22 +1,28 @@
 <div class="container">
   <h1 class="page-header"><%= username %> -  Reminders</h1>
-  <p>
-    <a href="/auth/logout" class="btn btn-secondary">Logout</a>  
-  </p>
 
-
-  <ul class="list-group">
-    <% reminders.forEach(function (reminderItem) { %>
-    <li class="list-group-item">
-      <strong><%= reminderItem.title %>: </strong>
-      <%= reminderItem.description %> || Completed: <% if
+<div class="btn-group col-md-9 mb-3" role="group" aria-label="Basic example">
+   <a href="/auth/logout" class="btn btn-danger col-md-3 mr-3">Logout</a>
+   <% if (isAdmin == true) { %>
+   <a href="/admin"  class="btn btn-secondary col-md-3">Admin</a> <% } %>
+ 
+</div>
+        <% reminders.forEach(function (reminderItem) { %>
+      <div class="card">
+        <div class="card-header">
+          <%= reminderItem.title %>
+        </div>
+        <div class="card-body">
+          <p class="card-title"><%= reminderItem.description %></p>
+          <p class="card-text">Completed: <% if
       (reminderItem.completed == true) { %>
       <span class="badge badge-success">True</span>
       <% } else if (reminderItem.completed == false) { %>
       <span class="badge badge-danger">False</span>
-      <% } %>
-      <a class="pull-right" href="<%= "/reminder/" + reminderItem.id %>">View</a>
-    </li>
+      <% } %></p>
+          <a class="btn btn-primary col-md-3"  href="<%= "/reminder/" + reminderItem.id %>">View</a>
+        </div>
+      </div>
     <% }) %>
   </ul>
   

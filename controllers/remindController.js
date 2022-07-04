@@ -7,6 +7,7 @@ let remindController = {
     res.render("reminder/index", {
       reminders: remindModel.findByUserId(req.user.id),
       username: req.user.name,
+      isAdmin: req.user.role === "admin" ? true : false,
     })
   },
 

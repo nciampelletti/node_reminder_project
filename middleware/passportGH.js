@@ -12,7 +12,7 @@ const ghStrategy = new GitHubStrategy(
   function (accessToken, refreshToken, profile, done) {
     const user = userController.getUserById(profile.id)
     if (!user) {
-      userController.createUser(profile.id, profile.displayName)
+      userController.createUser(profile.id, profile.displayName, "", "", "user")
     }
 
     return user

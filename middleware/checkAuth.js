@@ -11,4 +11,12 @@ module.exports = {
     }
     res.redirect("/reminders")
   },
+  isAdmin: function (req, res, next) {
+    //console.log("we are in admin")
+
+    if (req.user.role === "admin") {
+      return next()
+    }
+    res.redirect("/reminders")
+  },
 }

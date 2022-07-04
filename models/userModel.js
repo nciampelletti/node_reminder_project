@@ -4,18 +4,21 @@ const users = [
     name: "Jimmy Smith",
     email: "jimmy123@gmail.com",
     password: "jimmy123!",
+    role: "admin",
   },
   {
     id: 2,
     name: "Johnny Doe",
     email: "johnny123@gmail.com",
     password: "johnny123!",
+    role: "uclearser",
   },
   {
     id: 3,
     name: "Jonathan Chen",
     email: "jonathan123@gmail.com",
     password: "jonathan123!",
+    role: "user",
   },
 ]
 
@@ -32,8 +35,8 @@ const userModel = {
 
     return user
   },
-  createNewUser: (id, name, email, password) => {
-    users.push({ id, name, email, password })
+  createNewUser: (id, name, email, password, role) => {
+    users.push({ id, name, email, password, role })
 
     const user = users.find((user) => user.id === id)
 
