@@ -17,6 +17,14 @@ const getUserById = (id) => {
   return null
 }
 
+const createUser = (id, name, email, password) => {
+  let user = userModel.createNewUser(id, name, email, password)
+  if (user) {
+    return user
+  }
+  return null
+}
+
 function isUserValid(user, password) {
   return user.password === password
 }
@@ -24,4 +32,5 @@ function isUserValid(user, password) {
 module.exports = {
   getUserByEmailIdAndPassword,
   getUserById,
+  createUser,
 }

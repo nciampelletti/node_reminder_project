@@ -29,10 +29,15 @@ const userModel = {
   },
   findById: (id) => {
     const user = users.find((user) => user.id === id)
-    if (user) {
-      return user
-    }
-    throw new Error(`Couldn't find user with id: ${id}`)
+
+    return user
+  },
+  createNewUser: (id, name, email, password) => {
+    users.push({ id, name, email, password })
+
+    const user = users.find((user) => user.id === id)
+
+    return user
   },
 }
 

@@ -2,6 +2,9 @@ const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const session = require("express-session")
 const path = require("path")
+require("dotenv").config()
+const passport = require("passport")
+
 const port = process.env.port || 8000
 
 const app = express()
@@ -12,7 +15,7 @@ app.use(express.static(path.join(__dirname, "public")))
 //configure sessions
 app.use(
   session({
-    secret: "secret", //use better secret
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -24,7 +27,6 @@ app.use(
 )
 
 //this is where we do all configuration for passportjs
-const passport = require("./middleware/passport")
 
 const authRoute = require("./routes/authRoute")
 const remindersRoute = require("./routes/remindRoute")

@@ -16,12 +16,14 @@
   "homepage": "http",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "dotenv": "^16.0.1",
     "ejs": "^2.5.5",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "express-layouts": "^1.0.0",
     "express-session": "^1.17.1",
     "passport": "^0.4.1",
+    "passport-github2": "^0.1.12",
     "passport-local": "^1.0.0"
   }
 }

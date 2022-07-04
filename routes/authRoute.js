@@ -1,5 +1,7 @@
 const express = require("express")
 const passport = require("../middleware/passport")
+const passportGH = require("../middleware/passportGH")
+
 const { forwardAuthenticated } = require("../middleware/checkAuth")
 
 const router = express.Router()
@@ -18,5 +20,20 @@ router.get("/logout", (req, res) => {
   req.logout()
   res.redirect("/auth/login")
 })
+
+router.get(
+  "/github",
+  passportGH.authenticate("github", { scope: ["user:email"] })
+)
+
+router.get(
+  "/github/callback",
+  passportGH.authenticate("github", { failureRedirect: "/auth/login" }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    console.log("sucess redirect")
+    res.redirect("/reminders")
+  }
+)
 
 module.exports = router
