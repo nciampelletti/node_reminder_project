@@ -36,15 +36,15 @@ router.get(
   }
 )
 
-router.get("/sessions", (req, res) => {
-  req.sessionStore.sessionModel
-    .findAll()
-    .then((sessions) =>
-      sessions.map((sess) => JSON.parse(sess.dataValues.data))
-    )
-    .then((sessions) => {
-      res.send(sessions)
-    })
-})
+// router.get("/sessions", (req, res) => {
+//   req.sessionStore.sessionModel
+//     .findAll()
+//     .then((sessions) =>
+//       sessions.map((sess) => JSON.parse(sess.dataValues.data))
+//     )
+//     .then((sessions) => {
+//       res.send(sessions)
+//     })
+// })
 
 module.exports = router
